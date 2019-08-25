@@ -3,7 +3,7 @@ import subprocess
 import sys
 import time
 
-def trackFile(fpath, conf=None):
+def trackFile(fpath, conf=None, istream=sys.stdout):
     name, extension = os.path.splitext(fpath)
     last_modified = os.path.getmtime(fpath)
     if conf is None:
@@ -17,12 +17,8 @@ def trackFile(fpath, conf=None):
 
         
         subprocess.call(conf['compile'].split(" "))
-        
-        if 'input' in conf:
-            fp = open(conf['input'], "r")
-            run = subprocess.Popen(conf['run'].split(" "), stdout=sys.stdout, stdin=fp)
-        else:    
-            run = subprocess.Popen(conf['run'].split(" "), stdout=sys.stdout, stdin=sys.stdin)
+
+        run = subprocess.Popen(conf['run'].split(" "), stdout=sys.stdout, stdin=istream)
 
     while True:
         try:
@@ -42,12 +38,7 @@ def trackFile(fpath, conf=None):
 
                     # print(conf['run'])
                     subprocess.call(conf['compile'].split(" "))
-                    if 'input' in conf:
-                        fp = open(conf['input'], "r")
-                        run = subprocess.Popen(conf['run'].split(" "), stdout=sys.stdout, stdin=fp)
-                    else:    
-                        run = subprocess.Popen(conf['run'].split(" "), stdout=sys.stdout, stdin=sys.stdin)
-
+                    run = subprocess.Popen(conf['run'].split(" "), stdout=sys.stdout, stdin=istream)
 
             time.sleep(0.5)
         except KeyboardInterrupt:

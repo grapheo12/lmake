@@ -1,0 +1,4 @@
+{
+    "compile": "g++ -g ?fpath? -o ?name?",
+    "run": "./?name?"
+}
