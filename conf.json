@@ -1,0 +1,5 @@
+{
+    "compile": "gcc -g ?fpath? -o ?name?",
+    "run": "./?name?",
+    "input": "input.txt"
+}
