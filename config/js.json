@@ -1,0 +1,4 @@
+{
+    "compile": "echo Running ?fpath?",
+    "run": "node ?fpath?"
+}
